@@ -13,9 +13,9 @@ import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
-import { useTheme } from '@emotion/react';
-import { Bedtime, Brightness1, BrightnessHigh, NavigateNext } from '@mui/icons-material';
+import { Bedtime, BrightnessHigh } from '@mui/icons-material';
 import Link from 'next/link';
+import useTailwindDarkModeSync from './useTailwindDarkModeSync';
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
     display: 'flex',
@@ -32,6 +32,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 }));
 
 export default function Header() {
+    useTailwindDarkModeSync()
     const [open, setOpen] = useState(false);
     const toggleDrawer = (newOpen: boolean) => () => {
         setOpen(newOpen);
