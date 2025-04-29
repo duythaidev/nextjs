@@ -5,9 +5,24 @@ const theme = createTheme({
   colorSchemes: {
     dark: {
       palette: {
+        primary: {
+          main: '#fff'
+        },
+        secondary: {
+          main: '#000'
+        }
       }
     },
-    light: {}
+    light: {
+      palette: {
+        primary: {
+          main: '#000',
+        },
+        secondary: {
+          main: '#fff'
+        }
+      }
+    }
   },
 });
 

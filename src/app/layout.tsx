@@ -4,7 +4,7 @@ import "./globals.css";
 import { Roboto } from 'next/font/google';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '@/theme';
-import  { CssBaseline, StorageManager } from "@mui/material";
+import { CssBaseline, StorageManager } from "@mui/material";
 import Header from "@/components/Header";
 
 const roboto = Roboto({
@@ -28,11 +28,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`antialiased ${roboto.variable}`}>
-        <ThemeProvider defaultMode="light"  theme={theme}>
+        <ThemeProvider defaultMode="light" theme={theme}>
           <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-          <CssBaseline enableColorScheme />
-          <Header></Header>
-            {children}  
+            <CssBaseline enableColorScheme />
+            <Header></Header>
+            {children}
           </AppRouterCacheProvider>
         </ThemeProvider>
       </body>

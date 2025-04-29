@@ -15,6 +15,7 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import { useTheme } from '@emotion/react';
 import { Bedtime, Brightness1, BrightnessHigh, NavigateNext } from '@mui/icons-material';
+import Link from 'next/link';
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
     display: 'flex',
@@ -25,9 +26,8 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
     backdropFilter: 'blur(24px)',
     border: '1px solid',
     borderColor: theme.palette.primary.main,
-    backgroundColor: 'black',
-    boxShadow: theme.shadows[3],
-    color: '#fff',
+    backgroundColor: theme.palette.secondary.main,
+    boxShadow: theme.palette.primary.main === '#fff' ? '0 0 20px rgba(255, 255, 255, 0.1)' : '0 0 20px rgba(0, 0, 0, 0.1)', // bóng đỏ mờ
     padding: '8px 12px',
 }));
 
@@ -37,7 +37,6 @@ export default function Header() {
         setOpen(newOpen);
     };
     const { mode, setMode } = useColorScheme();
-
 
     const handleChangeTheme = () => {
         if (mode === 'system' || mode === 'dark') {
@@ -62,26 +61,14 @@ export default function Header() {
                 <StyledToolbar variant="dense" disableGutters>
                     {/* Desktop */}
                     <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', px: 0 }}>
-                        <AcUnitIcon />
+                        <AcUnitIcon color='primary' />
                         <Button color="primary">DuyThaiTools</Button>
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                             <Button variant="text" size="small">
-                                Features
+                                <Link href={'/'}>Home</Link>
                             </Button>
-                            <Button variant="text" size="small">
-                                Testimonials
-                            </Button>
-                            <Button variant="text" size="small">
-                                Highlights
-                            </Button>
-                            <Button variant="text" size="small">
-                                Pricing
-                            </Button>
-                            <Button variant="text" size="small" sx={{ minWidth: 0 }}>
-                                FAQ
-                            </Button>
-                            <Button variant="text" size="small" sx={{ minWidth: 0 }}>
-                                Blog
+                            <Button variant="text" size="small" sx={{ minWidth: 0 }} >
+                                <Link href={'/todo'}>Todos App</Link>
                             </Button>
                         </Box>
                     </Box>
@@ -99,7 +86,7 @@ export default function Header() {
                             Sign up
                         </Button>
                         <Button variant="outlined" onClick={handleChangeTheme} sx={{ minWidth: 0, p: 1 }}>
-                            {mode === 'light' ? <BrightnessHigh /> : <Bedtime />}
+                            {mode === 'light' ? <Bedtime /> : <BrightnessHigh />}
                         </Button>
                     </Box>
                     {/* Mobile */}
