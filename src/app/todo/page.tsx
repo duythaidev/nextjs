@@ -1,18 +1,12 @@
 'use client'
 
-import { Box, Button, IconButton, InputAdornment, TextField, Typography } from '@mui/material';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import { CheckCircle, Close, Delete, RadioButtonUnchecked } from '@mui/icons-material';
-import { SyntheticEvent, useState } from 'react';
-import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
+import { useState } from 'react';
+import Title from '@/components/Todos/Title';
+import InputField from '@/components/Todos/InputField';
+import TodosContainer from '@/components/Todos/TodosContainer';
+import Popup from '@/components/Popup';
 
-interface ITodos {
-    id: number,
-    description: string,
-    isChecked: boolean
-}
-
-const data: ITodos[] = [
+const data: ITodo[] = [
     {
         id: 1,
         description: 'a',
@@ -27,9 +21,9 @@ const data: ITodos[] = [
 ]
 
 export default function CustomizedInputBase() {
-    const [todos, setTodos] = useState<ITodos[]>(data)
+    const [todos, setTodos] = useState<ITodo[]>(data)
     const [todoDescription, setTodoDescription] = useState<string>('')
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState<boolean>(false);
 
     const addTodo = () => {
         if (todoDescription.length !== 0) {
@@ -45,21 +39,9 @@ export default function CustomizedInputBase() {
             setOpen(true);
         }
     }
-    const handleClose = (
-        event: SyntheticEvent | Event,
-        reason?: SnackbarCloseReason,
-    ) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setOpen(false);
-    };
 
     const handleCheck = (id: number) => {
-        const newData = todos.map((e) =>
-            e.id === id ? { ...e, isChecked: !e.isChecked } : e
-        )
+        const newData = todos.map((e) => e.id === id ? { ...e, isChecked: !e.isChecked } : e)
         setTodos(newData)
     }
 
@@ -67,72 +49,15 @@ export default function CustomizedInputBase() {
         const newData = todos.filter(e => e.id !== id)
         setTodos(newData)
     }
-    const action = (
-        <>
 
-            <IconButton size="small"
-                aria-label="close"
-                color="inherit"
-                onClick={handleClose}
-            >
-                <Close fontSize="small" />
-            </IconButton>
-        </>
-    );
     return (
-        <div className='w-full h-screen flex flex-col justify-center items-center'>
-            <div className='min-h-1/2 dark:bg-white bg-secondary flex flex-col items-center w-2/3 md:w-1/3 p-5 rounded-xl '>
-                <Typography variant='h5' className='w-full'><CalendarMonthIcon fontSize={'large'} className='mr-2' />To-do List</Typography>
-                <TextField className='w-full mx-auto !mt-5'
-                    onChange={(e) => setTodoDescription(e.target.value)}
-                    value={todoDescription}
-                    variant="standard"
-                    autoComplete='true'
-                    slotProps={{
-                        root: {
-                            sx: {
-                                borderRadius: '35px',
-                                backgroundColor: "#fff",
-                            },
-                        },
-                        input: {
-                            style: {
-                                color: '#000',
-                                padding: '10px',
-                                fontSize: 'calc(15px + 0.390625vw)'
-                            },
-                            disableUnderline: true,
-                            endAdornment:
-                                <InputAdornment position="start">
-                                    <Button onClick={addTodo} sx={{ borderRadius: '10px', padding: 'calc(5px + 0.390625vw)', backgroundColor: '#000' }} >Add</Button>
-                                </InputAdornment>
-                        },
-                    }} />
-                <Box marginTop={'20px'} width={'100%'}>
-                    {todos.map((element, index) => {
-                        return (
-                            <Box display={'flex'} alignItems={'center'} key={element.id}>
-                                <IconButton color="primary" onClick={() => handleCheck(element.id)}>
-                                    {element.isChecked ? <CheckCircle /> : <RadioButtonUnchecked />}
-                                </IconButton>
-                                <Typography sx={{ textDecorationLine: element.isChecked ? 'line-through' : 'initial' }} flex={1}>{element.description}</Typography>
-                                <IconButton color="primary" onClick={() => handleDelete(element.id)}>
-                                    <Delete />
-                                </IconButton>
-
-                            </Box>
-                        )
-                    })}
-                </Box>
+        <>
+            <div className='min-h-1/2 bg-amber-500 dark:bg-amber-300 bg-secondary flex flex-col items-center w-2/3 md:w-1/3 p-5 rounded-xl '>
+                <Title title='Todo page' />
+                <InputField todoDescription={todoDescription} onChange={setTodoDescription} onClick={addTodo}></InputField>
+                <TodosContainer todos={todos} handleCheck={handleCheck} handleDelete={handleDelete}></TodosContainer>
             </div>
-            <Snackbar
-                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                open={open}
-                autoHideDuration={6000}
-                onClose={handleClose}
-                message="UwU plz input"
-                action={action}
-            />
-        </div>
+            <Popup open={open} setOpen={setOpen} title='UwU plz input' ></Popup>
+        </>
     );
 }

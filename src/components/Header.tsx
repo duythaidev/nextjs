@@ -15,7 +15,7 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import { Bedtime, BrightnessHigh } from '@mui/icons-material';
 import Link from 'next/link';
-import useTailwindDarkModeSync from './useTailwindDarkModeSync';
+import useTailwindDarkModeSync from '../hooks/useTailwindDarkModeSync';
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
     display: 'flex',
