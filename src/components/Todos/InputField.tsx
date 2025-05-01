@@ -20,7 +20,7 @@ const InputField = ({ todoDescription, onChange, onClick }: IProps) => {
                         style: { color: '#000', padding: '10px', fontSize: 'calc(15px + 0.390625vw)' }, disableUnderline: true,
                         endAdornment:
                             <InputAdornment position="start">
-                                <Button onClick={onClick} sx={{ borderRadius: '10px', padding: 'calc(5px + 0.390625vw)', backgroundColor: '#000' }}>
+                                <Button type="submit" onClick={onClick} sx={{ borderRadius: '10px', padding: 'calc(5px + 0.390625vw)', backgroundColor: '#000' }}>
                                     Add
                                 </Button>
                             </InputAdornment>

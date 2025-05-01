@@ -12,7 +12,7 @@ const TodosContainer = ({ todos, handleCheck, handleDelete }: IProps) => {
 
     return (
         <Box marginTop={'20px'} width={'100%'}>
-            {todos.map((element, index) => {
+            {todos && todos.length > 0 && todos.map((element) => {
                 return (
                     <Box display={'flex'} alignItems={'center'} key={element.id}>
                         <IconButton color="primary" onClick={() => handleCheck(element.id)}>
