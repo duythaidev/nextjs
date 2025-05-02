@@ -6,10 +6,10 @@ import { SyntheticEvent } from "react";
 interface IProps {
     setOpen: (open: boolean) => void,
     open: boolean,
-    title:string
+    title: string
 }
 
-const Popup = ({ open, setOpen,title }: IProps) => {
+const Popup = ({ open, setOpen, title }: IProps) => {
 
     const handleClose = (event: SyntheticEvent | Event, reason?: SnackbarCloseReason,) => {
         if (reason === 'clickaway') {
