@@ -18,8 +18,6 @@ const TodoInputField = () => {
         }
     }
 
-
-
     return (
         <>
             <TextField className='w-full mx-auto !mt-5'
