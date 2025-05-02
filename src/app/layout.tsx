@@ -6,6 +6,9 @@ import { ThemeProvider } from '@mui/material/styles';
 import theme from '@/theme';
 import { CssBaseline } from "@mui/material";
 import Header from "@/components/Header";
+import InitColorSchemeScript from '@mui/material/InitColorSchemeScript';
+import ModeSwitch from "@/components/ModeSwitch";
+
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -26,15 +29,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" >
+    <html lang="en" suppressHydrationWarning>
       <body className={`antialiased ${roboto.variable}`}>
-        <ThemeProvider defaultMode="light" theme={theme}>
-          <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+        <InitColorSchemeScript attribute="class" />
+        <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+          <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
             <Header></Header>
+            {/* <ModeSwitch /> */}
             {children}
-          </AppRouterCacheProvider>
-        </ThemeProvider>
+          </ThemeProvider>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );

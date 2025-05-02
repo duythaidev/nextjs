@@ -5,7 +5,7 @@ import TodosContainer from "@/components/Todos/TodosContainer";
 export default async function Page() {
     let todos: ITodo[] = []
     try {
-        const res = await fetch(`http://localhost:8000/api/todos`, {
+        const res = await fetch(`${process.env.API_URL}/api/todos`, {
             cache: 'force-cache',
             headers: {
                 userId: `${1}`
@@ -19,10 +19,10 @@ export default async function Page() {
         console.log(error)
     }
     return (
-        <div className='min-h-1/2 bg-dark-500 shadow-orange-300 shadow-2sm ring-1 ring-orange-300  bg-secondary flex flex-col items-center w-2/3 md:w-1/3 p-5 rounded-xl '>
+        <div className='min-h-1/2 flex flex-col items-center w-2/3 p-2.5 lg:w-1/3 lg:p-5 rounded-xl bg-dark-500 bg-secondary shadow-orange-300 shadow-2sm ring-1 ring-orange-300'>
                 <Title title='Todo page' />
-                <TodoInputField></TodoInputField>
-                <TodosContainer todos={todos}></TodosContainer>
+                <TodoInputField/>
+                <TodosContainer todos={todos}/>
         </div>
     )
 }

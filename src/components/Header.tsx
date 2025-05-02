@@ -15,7 +15,6 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import { Bedtime, BrightnessHigh } from '@mui/icons-material';
 import Link from 'next/link';
-import useTailwindDarkModeSync from '../hooks/useTailwindDarkModeSync';
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
     display: 'flex',
@@ -25,14 +24,14 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
     borderRadius: `8px`,
     backdropFilter: 'blur(24px)',
     border: '1px solid',
-    borderColor: theme.palette.primary.main,
-    backgroundColor: theme.palette.secondary.main,
+    borderColor: 'black',
+    backgroundColor: 'white',
+    color: 'black',
     boxShadow: theme.palette.primary.main === '#fff' ? '0 0 20px rgba(255, 255, 255, 0.1)' : '0 0 20px rgba(0, 0, 0, 0.1)', // bóng đỏ mờ
     padding: '8px 12px',
 }));
 
 export default function Header() {
-    useTailwindDarkModeSync()
     const [open, setOpen] = useState(false);
     const toggleDrawer = (newOpen: boolean) => () => {
         setOpen(newOpen);
@@ -44,6 +43,7 @@ export default function Header() {
             setMode('light')
             return
         }
+
         setMode('dark')
     }
 
@@ -59,16 +59,16 @@ export default function Header() {
             }}
         >
             <Container maxWidth="lg">
-                <StyledToolbar variant="dense" disableGutters>
+                <StyledToolbar variant="dense" disableGutters >
                     {/* Desktop */}
                     <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', px: 0 }}>
-                        <AcUnitIcon color='primary' />
-                        <Button color="primary">DuyThaiTools</Button>
+                        <AcUnitIcon />
+                        <Button sx={{ color: 'black' }}>DuyThaiTools</Button>
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                            <Button variant="text" size="small">
+                            <Button sx={{ color: 'black' }} variant="text" size="small">
                                 <Link href={'/'}>Home</Link>
                             </Button>
-                            <Button variant="text" size="small" sx={{ minWidth: 0 }} >
+                            <Button variant="text" size="small" sx={{ minWidth: 0, color: 'black' }} >
                                 <Link href={'/todo'}>Todos App</Link>
                             </Button>
                         </Box>
@@ -80,20 +80,21 @@ export default function Header() {
                             alignItems: 'center',
                         }}
                     >
-                        <Button color="primary" variant="text" size="small">
+                        <Button variant="text" sx={{ color: 'black' }} size="small">
                             Sign in
                         </Button>
-                        <Button color="primary" variant="contained" size="small">
+                        <Button variant="contained" sx={{ color: 'white', backgroundColor: 'black' }} size="small">
                             Sign up
                         </Button>
-                        <Button variant="outlined" onClick={handleChangeTheme} sx={{ minWidth: 0, p: 1 }}>
+                        <Button variant="outlined" onClick={handleChangeTheme} color='secondary' sx={{ borderColor: 'black', backgroundColor: 'primary.main', minWidth: 0, p: 1 }}>
                             {mode === 'light' ? <Bedtime /> : <BrightnessHigh />}
                         </Button>
                     </Box>
                     {/* Mobile */}
                     <Box sx={{ display: { xs: 'flex', md: 'none' }, gap: 1 }}>
+
                         <IconButton aria-label="Menu button" onClick={toggleDrawer(true)}>
-                            <MenuIcon />
+                            <MenuIcon sx={{ color: 'black' }} />
                         </IconButton>
                         <Drawer
                             anchor="top"
@@ -109,12 +110,15 @@ export default function Header() {
                                 <Box
                                     sx={{
                                         display: 'flex',
-                                        justifyContent: 'flex-end',
+                                        justifyContent: 'space-between',
                                     }}
                                 >
                                     <IconButton onClick={toggleDrawer(false)}>
                                         <CloseRoundedIcon />
                                     </IconButton>
+                                    <Button variant="outlined" onClick={handleChangeTheme} color='secondary' sx={{ borderColor: 'black', backgroundColor: 'primary.main', minWidth: 0, p: 1 }}>
+                                        {mode === 'light' ? <Bedtime /> : <BrightnessHigh />}
+                                    </Button>
                                 </Box>
 
                                 <MenuItem>Features</MenuItem>
@@ -134,6 +138,7 @@ export default function Header() {
                                         Sign in
                                     </Button>
                                 </MenuItem>
+
 
 
                             </Box>
