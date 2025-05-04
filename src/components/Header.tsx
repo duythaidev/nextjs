@@ -81,10 +81,10 @@ export default function Header() {
                         }}
                     >
                         <Button variant="text" sx={{ color: 'black' }} size="small">
-                            Sign in
+                            <Link href={'/login'}>Sign in</Link>
                         </Button>
                         <Button variant="contained" sx={{ color: 'white', backgroundColor: 'black' }} size="small">
-                            Sign up
+                            <Link href={'/register'}>Sign up</Link>
                         </Button>
                         <Button variant="outlined" onClick={handleChangeTheme} color='secondary' sx={{ borderColor: 'black', backgroundColor: 'primary.main', minWidth: 0, p: 1 }}>
                             {mode === 'light' ? <Bedtime /> : <BrightnessHigh />}
@@ -130,12 +130,12 @@ export default function Header() {
                                 <Divider sx={{ my: 3 }} />
                                 <MenuItem>
                                     <Button color="primary" variant="contained" fullWidth>
-                                        Sign up
+                                        <Link href={'/register'}>Sign up</Link>
                                     </Button>
                                 </MenuItem>
                                 <MenuItem>
                                     <Button color="primary" variant="outlined" fullWidth>
-                                        Sign in
+                                        <Link href={'/login'}>Sign in</Link>
                                     </Button>
                                 </MenuItem>
 

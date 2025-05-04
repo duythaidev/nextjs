@@ -7,10 +7,12 @@
   --breakpoint-3xl: 120rem;
 
 }
-.m-h-120{
+
+.m-h-120 {
   min-height: 120vh;
 }
-.m-h-110{
+
+.m-h-110 {
   min-height: 110vh;
 }
 

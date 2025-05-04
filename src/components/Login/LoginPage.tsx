@@ -2,8 +2,11 @@
 import Stack from '@mui/material/Stack';
 import SignInCard from './SignInCard';
 import Content from './LoginContent';
+import { withSnackbar } from '../SnackBar';
 
-export default function LoginPage(props: { disableCustomTheme?: boolean }) {
+const SignInCardSnackBar = withSnackbar(SignInCard);
+
+export default function LoginPage() {
   return (
     <>
       <Stack
@@ -46,7 +49,7 @@ export default function LoginPage(props: { disableCustomTheme?: boolean }) {
             }}
           >
             <Content />
-            <SignInCard />
+            <SignInCardSnackBar />
           </Stack>
         </Stack>
       </Stack>

@@ -33,7 +33,7 @@ const Card = styled(MuiCard)(({ theme }) => ({
   }),
 }));
 
-export default function SignInCard() {
+export default function SignInCard({ snackbarShowMessage }: { snackbarShowMessage: (show: boolean) => void }) {
   const [emailError, setEmailError] = useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
   const [passwordError, setPasswordError] = useState(false);
@@ -49,15 +49,16 @@ export default function SignInCard() {
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    if (emailError || passwordError) {
+    // if (emailError || passwordError) {
       event.preventDefault();
-      return;
-    }
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    //   return;
+    // }
+    // const data = new FormData(event.currentTarget);
+    // console.log({
+    //   email: data.get('email'),
+    //   password: data.get('password'),
+    // });
+    snackbarShowMessage(true)
   };
 
   const validateInputs = () => {
@@ -66,29 +67,29 @@ export default function SignInCard() {
 
     let isValid = true;
 
-    if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
-      setEmailError(true);
-      setEmailErrorMessage('Please enter a valid email address.');
-      isValid = false;
-    } else {
-      setEmailError(false);
-      setEmailErrorMessage('');
-    }
+    // if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
+    //   setEmailError(true);
+    //   setEmailErrorMessage('Please enter a valid email address.');
+    //   isValid = false;
+    // } else {
+    //   setEmailError(false);
+    //   setEmailErrorMessage('');
+    // }
 
-    if (!password.value || password.value.length < 6) {
-      setPasswordError(true);
-      setPasswordErrorMessage('Password must be at least 6 characters long.');
-      isValid = false;
-    } else {
-      setPasswordError(false);
-      setPasswordErrorMessage('');
-    }
+    // if (!password.value || password.value.length < 6) {
+    //   setPasswordError(true);
+    //   setPasswordErrorMessage('Password must be at least 6 characters long.');
+    //   isValid = false;
+    // } else {
+    //   setPasswordError(false);
+    //   setPasswordErrorMessage('');
+    // }
 
     return isValid;
   };
 
   return (
-    <Card variant="outlined" sx={{backgroundColor:'rgba(0,0,0,0.3)'}}>
+    <Card variant="outlined" sx={{ backgroundColor: 'rgba(0,0,0,0.3)' }}>
       <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
         <FacebookOutlined />
       </Box>
