@@ -14,9 +14,10 @@ export async function addUserTodos(description: string, userId: number) {
         },
         body: JSON.stringify({ description, userId }),
     })
-    console.log(res.ok)
+    // console.log(res.ok)
     const data = await res.json()
     refetchTag('todos')
+
     return data
 }
 

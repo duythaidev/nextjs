@@ -12,9 +12,10 @@ import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import { Facebook, Google } from '@mui/icons-material';
-import { useActionState, useState } from 'react';
+import { useActionState, useEffect, useState } from 'react';
 import { register } from '@/app/register/actions';
-
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
@@ -50,10 +51,13 @@ const SignUpContainer = styled(Stack)(({ theme }) => ({
   }),
 }));
 
-const initialState = {
-  message: "",
+const initialState: IData = {
+  EM: "",
+  EC: -1
 };
 export default function RegisterPage() {
+  const { push } = useRouter();
+
   const [emailError, setEmailError] = useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
   const [passwordError, setPasswordError] = useState(false);
@@ -67,6 +71,16 @@ export default function RegisterPage() {
 
 
   const [state, formAction, pending] = useActionState(register, initialState)
+
+  useEffect(() => {
+    if (state.EC === 0) {
+      toast('🦄 ' + state.EM)
+      push('/login')
+    } else if (state.EC === 1) {
+      toast('🦄 ' + state.EM)
+    }
+  }, [state])
+
 
   const validateInputs = () => {
 

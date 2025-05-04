@@ -7,6 +7,7 @@ import theme from '@/theme';
 import { CssBaseline } from "@mui/material";
 import Header from "@/components/Header";
 import InitColorSchemeScript from '@mui/material/InitColorSchemeScript';
+import { ToastContainer } from "react-toastify";
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -36,6 +37,18 @@ export default function RootLayout({
             <Header></Header>
             {/* <ModeSwitch /> */}
             {children}
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick={false}
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>

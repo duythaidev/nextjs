@@ -1,13 +1,13 @@
-import React, {  useState } from "react";
+import  { ComponentType, useState } from "react";
 
 import { Button, IconButton, Snackbar, SnackbarCloseReason } from "@mui/material";
 import { Close } from "@mui/icons-material";
 
-export const withSnackbar = (WrappedComponent: any) => {
+export const withSnackbar = (WrappedComponent: ComponentType) => {
     return (props: any) => {
         const [open, setOpen] = useState(false);
         const showMessage = () => {
-            setOpen(true);  
+            setOpen(true);
         };
 
         const handleClose = (event: React.SyntheticEvent | Event, reason?: SnackbarCloseReason,) => {

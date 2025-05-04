@@ -3,3 +3,7 @@ interface ITodo {
     description: string,
     isChecked: boolean
 }
+interface IData {
+    EM: string,
+    EC: number
+}

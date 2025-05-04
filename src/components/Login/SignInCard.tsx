@@ -13,7 +13,9 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import { Google, FacebookOutlined } from '@mui/icons-material';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useActionState, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { login } from '@/app/login/actions';
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
@@ -33,71 +35,33 @@ const Card = styled(MuiCard)(({ theme }) => ({
   }),
 }));
 
-export default function SignInCard({ snackbarShowMessage }: { snackbarShowMessage: (show: boolean) => void }) {
+const initialState: IData = {
+  EM: '',
+  EC: -1
+}
+
+export default function SignInCard() {
   const [emailError, setEmailError] = useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
   const [passwordError, setPasswordError] = useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
   const [open, setOpen] = useState(false);
+  const router = useRouter()
+  const [state, formAction, pending] = useActionState(login, initialState)
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleSubmit = () => {
+
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    // if (emailError || passwordError) {
-      event.preventDefault();
-    //   return;
-    // }
-    // const data = new FormData(event.currentTarget);
-    // console.log({
-    //   email: data.get('email'),
-    //   password: data.get('password'),
-    // });
-    snackbarShowMessage(true)
-  };
-
-  const validateInputs = () => {
-    const email = document.getElementById('email') as HTMLInputElement;
-    const password = document.getElementById('password') as HTMLInputElement;
-
-    let isValid = true;
-
-    // if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
-    //   setEmailError(true);
-    //   setEmailErrorMessage('Please enter a valid email address.');
-    //   isValid = false;
-    // } else {
-    //   setEmailError(false);
-    //   setEmailErrorMessage('');
-    // }
-
-    // if (!password.value || password.value.length < 6) {
-    //   setPasswordError(true);
-    //   setPasswordErrorMessage('Password must be at least 6 characters long.');
-    //   isValid = false;
-    // } else {
-    //   setPasswordError(false);
-    //   setPasswordErrorMessage('');
-    // }
-
-    return isValid;
-  };
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   return (
     <Card variant="outlined" sx={{ backgroundColor: 'rgba(0,0,0,0.3)' }}>
       <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
         <FacebookOutlined />
       </Box>
-      <Typography
-        component="h1"
-        variant="h4"
-        sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
-      >
+      <Typography component="h1" variant="h4" sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}>
         Sign in
       </Typography>
       <Box
@@ -111,7 +75,7 @@ export default function SignInCard({ snackbarShowMessage }: { snackbarShowMessag
           <TextField
             error={emailError}
             helperText={emailErrorMessage}
-            id="email"
+            onChange={(e) => setEmail(e.target.value)}
             type="email"
             name="email"
             placeholder="your@email.com"
@@ -129,7 +93,7 @@ export default function SignInCard({ snackbarShowMessage }: { snackbarShowMessag
             <Link
               component="button"
               type="button"
-              onClick={handleClickOpen}
+              onClick={() => router.push('register')}
               variant="body2"
               sx={{ alignSelf: 'baseline' }}
             >
@@ -142,7 +106,7 @@ export default function SignInCard({ snackbarShowMessage }: { snackbarShowMessag
             name="password"
             placeholder="••••••"
             type="password"
-            id="password"
+            onChange={(e) => setPassword(e.target.value)}
             autoComplete="current-password"
             autoFocus
             required
@@ -156,14 +120,14 @@ export default function SignInCard({ snackbarShowMessage }: { snackbarShowMessag
           label="Remember me"
         />
         {/* <ForgotPassword open={open} handleClose={handleClose} /> */}
-        <Button type="submit" fullWidth variant="contained" onClick={validateInputs}>
+        <Button type="submit" fullWidth variant="contained" >
           Sign in
         </Button>
         <Typography sx={{ textAlign: 'center' }}>
           Don&apos;t have an account?{' '}
           <span>
             <Link
-              href="/material-ui/getting-started/templates/sign-in/"
+              href="/register"
               variant="body2"
               sx={{ alignSelf: 'center' }}
             >
