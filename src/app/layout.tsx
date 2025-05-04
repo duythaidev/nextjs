@@ -7,8 +7,6 @@ import theme from '@/theme';
 import { CssBaseline } from "@mui/material";
 import Header from "@/components/Header";
 import InitColorSchemeScript from '@mui/material/InitColorSchemeScript';
-import ModeSwitch from "@/components/ModeSwitch";
-
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
