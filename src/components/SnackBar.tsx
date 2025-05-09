@@ -4,7 +4,7 @@ import { Button, IconButton, Snackbar, SnackbarCloseReason } from "@mui/material
 import { Close } from "@mui/icons-material";
 
 export const withSnackbar = (WrappedComponent: ComponentType) => {
-    return (props: any) => {
+    const WithSnackbar = (props: any) => {
         const [open, setOpen] = useState(false);
         const showMessage = () => {
             setOpen(true);

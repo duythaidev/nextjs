@@ -73,18 +73,22 @@ export default function RegisterPage() {
   const [state, formAction, pending] = useActionState(register, initialState)
 
   useEffect(() => {
-    if (state.EC === 0) {
-      toast('🦄 ' + state.EM)
-      push('/login')
-    } else if (state.EC === 1) {
-      toast('🦄 ' + state.EM)
+    const notif = () => {
+      if (state.EC === 0) {
+        toast('🦄 ' + state.EM)
+        push('/login')
+      } else if (state.EC === 1) {
+        toast('🦄 ' + state.EM)
+      }
     }
-  }, [state])
+
+    notif()
+  }, [state, push])
 
 
   const validateInputs = () => {
 
-    let isValid = true;
+    const isValid = true;
 
     // if (!email || !/\S+@\S+\.\S+/.test(email)) {
     //   setEmailError(true);
